@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1: JSON Parser</title>
+    <link rel="stylesheet" href="jsonparser2.css">
+</head>
+
+<body>
+    <div class="jsonp2-container">
+        <h1>🔍 Exercise 1: JSON Parser</h1>
+        <p class="jsonp2-subtitle">Practice handling JSON parsing errors with try-catch blocks</p>
+        <div class="jsonp2-objective">
+            <h3>🎯 Learning Objective:</h3>
+            <p>Learn to handle JSON.parse() errors using try-catch blocks. You'll practice catching SyntaxError
+                exceptions when invalid JSON is provided and displaying user-friendly error messages.</p>
+        </div>
+        <div class="jsonp2-input-group">
+            <label for="jsonInput">Enter JSON to parse:</label>
+            <textarea id="jsonInput" rows="6" placeholder='{"name": "John", "age": 30, "city": "New York"}'></textarea>
+        </div>
+        <button onclick="parseJSON()">Parse JSON</button>
+        <div id="jsonResult" class="jsonp2-result jsonp2-info">Ready to parse JSON... Click the button above to test
+            your implementation!</div>
+        <div class="jsonp2-test-samples">
+            <h4>🧪 Test Samples (click to use):</h4>
+            <button class="jsonp2-sample-button" onclick="setSample('valid1')">Valid Object</button>
+            <button class="jsonp2-sample-button" onclick="setSample('valid2')">Valid Array</button>
+            <button class="jsonp2-sample-button" onclick="setSample('invalid2')">Trailing Comma</button>
+            <button class="jsonp2-sample-button" onclick="setSample('invalid3')">Not JSON</button>
+            <button class="jsonp2-sample-button" onclick="setSample('empty')">Empty String</button>
+        </div>
+    </div>
+    <script src="jsonparser2.js"></script>
+</body>
+
+</html>

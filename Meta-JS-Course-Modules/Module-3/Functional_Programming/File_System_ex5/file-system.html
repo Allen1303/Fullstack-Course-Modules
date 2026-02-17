@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File System Explorer</title>
+    <link rel="stylesheet" href="file-system.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌳 File System Explorer</h1>
+
+        <div class="info-box">
+            <strong>Learning Goals:</strong> Practice tree structures, recursion, function scope, and problem-solving
+        </div>
+
+        <div class="controls">
+            <button onclick="displayTree()">Show File Tree</button>
+            <button onclick="calculateTotalSize()">Calculate Total Size</button>
+            <button onclick="findLargestFile()">Find Largest File</button>
+            <button onclick="countItems()">Count Files & Folders</button>
+            <input type="text" id="searchInput" placeholder="Search for file/folder">
+            <button onclick="searchFileSystem()">Search</button>
+            <button onclick="showAllPaths()">Show All Paths</button>
+        </div>
+
+        <div class="output" id="output">Click a button to explore the file system!</div>
+
+        <div class="challenge">
+            <h3>🎯 Your Implementation Tasks:</h3>
+            <ol>
+                <li><strong>displayTree():</strong> Show the file system structure with indentation</li>
+                <li><strong>calculateTotalSize():</strong> Add up all file sizes in the entire tree</li>
+                <li><strong>findLargestFile():</strong> Find the file with the biggest size</li>
+                <li><strong>countItems():</strong> Count total files and folders separately</li>
+                <li><strong>searchFileSystem():</strong> Find files/folders matching the search term</li>
+                <li><strong>showAllPaths():</strong> Display the full path to every item</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="file-system.js"></script>
+</body>
+
+</html>

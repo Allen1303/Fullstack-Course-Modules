@@ -1,0 +1,149 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2d2d2d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f7df1e;stop-opacity:0.1" />
+    </linearGradient>
+    
+    <!-- Card background -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3c3c3c;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#2a2a2a;stop-opacity:0.95" />
+    </linearGradient>
+    
+    <!-- Drop shadow filter -->
+    <filter id="dropshadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="600" y="60" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#f7df1e">
+    JavaScript Primitive Data Types
+  </text>
+  <text x="600" y="95" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#ffffff">
+    The 7 fundamental building blocks of JavaScript values
+  </text>
+  
+  <!-- Type Cards -->
+  
+  <!-- String -->
+  <g transform="translate(50, 140)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <circle cx="40" cy="40" r="20" fill="#f7df1e"/>
+    <text x="40" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000">"A"</text>
+    <text x="80" y="47" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#f7df1e">String</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Textual data enclosed in quotes</text>
+    <rect x="20" y="90" width="300" height="60" rx="5" fill="#1a1a1a" stroke="#f7df1e" stroke-width="1"/>
+    <text x="25" y="108" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let name = "JavaScript";</text>
+    <text x="25" y="125" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let msg = 'Hello World!';</text>
+    <text x="25" y="142" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let template = `Hi ${name}`;</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="13" fill="#cccccc" font-style="italic">Immutable • UTF-16 encoded</text>
+  </g>
+  
+  <!-- Number -->
+  <g transform="translate(410, 140)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <circle cx="40" cy="40" r="20" fill="#61dafb"/>
+    <text x="40" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000">42</text>
+    <text x="80" y="47" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#f7df1e">Number</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Integers and floating-point numbers</text>
+    <rect x="20" y="90" width="300" height="60" rx="5" fill="#1a1a1a" stroke="#f7df1e" stroke-width="1"/>
+    <text x="25" y="108" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let age = 25;</text>
+    <text x="25" y="125" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let price = 99.99;</text>
+    <text x="25" y="142" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let inf = Infinity;</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="13" fill="#cccccc" font-style="italic">64-bit floating point • Includes NaN</text>
+  </g>
+  
+  <!-- Boolean -->
+  <g transform="translate(770, 140)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <circle cx="40" cy="40" r="20" fill="#32cd32"/>
+    <text x="40" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000">✓</text>
+    <text x="80" y="47" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#f7df1e">Boolean</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Logical values - true or false</text>
+    <rect x="20" y="90" width="300" height="60" rx="5" fill="#1a1a1a" stroke="#f7df1e" stroke-width="1"/>
+    <text x="25" y="108" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let isActive = true;</text>
+    <text x="25" y="125" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let isComplete = false;</text>
+    <text x="25" y="142" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let result = 5 &gt; 3; // true</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="13" fill="#cccccc" font-style="italic">Only two values • Used in conditionals</text>
+  </g>
+  
+  <!-- Undefined -->
+  <g transform="translate(50, 340)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <circle cx="40" cy="40" r="20" fill="#ff6b6b"/>
+    <text x="40" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">?</text>
+    <text x="80" y="47" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#f7df1e">Undefined</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Declared but not assigned a value</text>
+    <rect x="20" y="90" width="300" height="60" rx="5" fill="#1a1a1a" stroke="#f7df1e" stroke-width="1"/>
+    <text x="25" y="108" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let x; // undefined</text>
+    <text x="25" y="125" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let obj = {};</text>
+    <text x="25" y="142" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">obj.missing; // undefined</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="13" fill="#cccccc" font-style="italic">Default value • Automatic assignment</text>
+  </g>
+  
+  <!-- Null -->
+  <g transform="translate(410, 340)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <circle cx="40" cy="40" r="20" fill="#9b59b6"/>
+    <text x="40" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">∅</text>
+    <text x="80" y="47" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#f7df1e">Null</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Intentional absence of value</text>
+    <rect x="20" y="90" width="300" height="60" rx="5" fill="#1a1a1a" stroke="#f7df1e" stroke-width="1"/>
+    <text x="25" y="108" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let data = null;</text>
+    <text x="25" y="125" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let result = getValue() || null;</text>
+    <text x="25" y="142" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">// Intentionally empty</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="13" fill="#cccccc" font-style="italic">Intentional emptiness • Single value</text>
+  </g>
+  
+  <!-- Symbol -->
+  <g transform="translate(770, 340)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <circle cx="40" cy="40" r="20" fill="#e67e22"/>
+    <text x="40" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">⚡</text>
+    <text x="80" y="47" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#f7df1e">Symbol</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Unique identifier guaranteed unique</text>
+    <rect x="20" y="90" width="300" height="60" rx="5" fill="#1a1a1a" stroke="#f7df1e" stroke-width="1"/>
+    <text x="25" y="108" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let id = Symbol('id');</text>
+    <text x="25" y="125" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let another = Symbol('id');</text>
+    <text x="25" y="142" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">id === another; // false</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="13" fill="#cccccc" font-style="italic">Always unique • ES2015 addition</text>
+  </g>
+  
+  <!-- BigInt -->
+  <g transform="translate(230, 540)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <circle cx="40" cy="40" r="20" fill="#3498db"/>
+    <text x="40" y="47" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">∞</text>
+    <text x="80" y="47" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#f7df1e">BigInt</text>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">Large integers beyond Number limits</text>
+    <rect x="20" y="90" width="300" height="60" rx="5" fill="#1a1a1a" stroke="#f7df1e" stroke-width="1"/>
+    <text x="25" y="108" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let big = 99999999n;</text>
+    <text x="25" y="125" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">let str = BigInt("12345");</text>
+    <text x="25" y="142" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">// Always ends with 'n'</text>
+    <text x="20" y="170" font-family="Arial, sans-serif" font-size="13" fill="#cccccc" font-style="italic">Arbitrary precision • ES2020</text>
+  </g>
+  
+  <!-- Note about typeof -->
+  <g transform="translate(630, 540)">
+    <rect width="340" height="180" rx="15" fill="url(#cardBg)" stroke="#f7df1e" stroke-width="2" filter="url(#dropshadow)"/>
+    <text x="170" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#f7df1e">💡 Remember</text>
+    <text x="20" y="70" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">• All primitives are immutable</text>
+    <text x="20" y="95" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">• Passed by value, not reference</text>
+    <text x="20" y="120" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">• Use typeof to check type:</text>
+    <rect x="20" y="130" width="300" height="25" rx="3" fill="#1a1a1a"/>
+    <text x="25" y="147" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">typeof "hello" // "string"</text>
+    <text x="25" y="167" font-family="Courier New, monospace" font-size="14" fill="#f7df1e">typeof 42 // "number"</text>
+  </g>
+  
+  <!-- Footer note -->
+  <text x="600" y="760" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#f7df1e" font-style="italic">
+    JavaScript's 7 primitive data types form the foundation of all JavaScript values
+  </text>
+</svg>

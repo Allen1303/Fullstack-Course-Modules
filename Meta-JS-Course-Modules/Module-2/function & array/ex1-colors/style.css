@@ -1,0 +1,12 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.output {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+button {
+  margin-top: 10px;
+}

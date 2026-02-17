@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Exercise</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 1px;
+        }
+
+        .header h3 {
+            color: #f1f5f9;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .user-profile {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .profile-field {
+            background: rgba(51, 65, 85, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-field::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .profile-field:hover::before {
+            opacity: 1;
+        }
+
+        .profile-field:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow:
+                0 20px 25px -5px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .field-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .field-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .field-value {
+            color: #f1f5f9;
+            font-size: 1.25rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            line-height: 1.4;
+        }
+
+        .destructuring-badge {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .extraction-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-right: 12px;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .extraction-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            animation: ripple 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .code-section {
+            margin-top: 32px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .code-header::before {
+            content: '💡';
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .code-title {
+            color: #f1f5f9;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #020617;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block::before {
+            content: 'JavaScript';
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            color: #64748b;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .syntax-highlight {
+            color: #fbbf24;
+        }
+
+        .keyword {
+            color: #a78bfa;
+        }
+
+        .string {
+            color: #34d399;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 32px 24px;
+                margin: 10px;
+            }
+
+            .header h3 {
+                font-size: 2rem;
+            }
+
+            .profile-field {
+                padding: 20px;
+            }
+
+            .field-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .destructuring-badge {
+                align-self: flex-start;
+            }
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h3>User Profile</h3>
+            <p class="subtitle">Object Destructuring Exercise</p>
+        </div>
+
+        <section class="user-profile">
+            <div class="profile-field">
+                <div class="status-indicator"></div>
+                <div class="field-header">
+                    <div class="field-label">
+                        <span class="extraction-indicator"></span>
+                        Full Name
+                    </div>
+                    <div class="destructuring-badge">{ name }</div>
+                </div>
+                <!--User Name Div-->
+                <div class="field-value" id="userName"></div>
+            </div>
+
+            <div class="profile-field">
+                <div class="status-indicator"></div>
+                <div class="field-header">
+                    <div class="field-label">
+                        <span class="extraction-indicator"></span>
+                        Email Address
+                    </div>
+                    <div class="destructuring-badge">{ email }</div>
+                </div>
+                <!--User Email Div-->
+                <div class="field-value" id="userEmail"></div>
+            </div>
+
+            <div class="profile-field">
+                <div class="status-indicator"></div>
+                <div class="field-header">
+                    <div class="field-label">
+                        <span class="extraction-indicator"></span>
+                        City Location
+                    </div>
+                    <div class="destructuring-badge">{ address: {city} }</div>
+                </div>
+
+                <!--User City Div-->
+                <div class="field-value" id="userCity"></div>
+            </div>
+        </section>
+
+        <div class="code-section">
+            <div class="code-header">
+                <div class="code-title">Destructuring Implementation</div>
+            </div>
+            <div class="code-block">
+                <span class="keyword">const</span> { <span class="syntax-highlight">name</span>, <span
+                    class="syntax-highlight">email</span>, <span class="syntax-highlight">address</span>: {<span
+                    class="syntax-highlight">city</span>} } = <span class="syntax-highlight">user</span>;
+            </div>
+        </div>
+    </div>
+
+    <script src="user_profile_app-exe.js"></script>
+</body>
+
+</html>

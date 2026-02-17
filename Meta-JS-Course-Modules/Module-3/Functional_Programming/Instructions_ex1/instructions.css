@@ -1,0 +1,71 @@
+// instruction-viewer/style.css
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#start {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#start:hover {
+  background-color: #4cae4c;
+}
+
+#instructionBox {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-left: 4px solid #5cb85c;
+  border-radius: 5px;
+  min-height: 50px;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  #start {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  #instructionBox {
+    font-size: 1rem;
+  }
+}

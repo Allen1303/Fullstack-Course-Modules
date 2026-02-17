@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Try-Catch Practice</title>
+    <link rel="stylesheet" href="shoppingCart.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🛒 Shopping Cart</h1>
+            <p>Master try-catch with real-world scenarios</p>
+        </header>
+
+        <!-- Product Catalog -->
+        <section class="products">
+            <h2>Available Products</h2>
+            <div class="product-grid">
+                <div class="product-card" data-id="1" data-name="Laptop" data-price="999.99">
+                    <div class="product-image">💻</div>
+                    <h3>Gaming Laptop</h3>
+                    <p class="price">$999.99</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card" data-id="2" data-name="Phone" data-price="699.99">
+                    <div class="product-image">📱</div>
+                    <h3>Smartphone</h3>
+                    <p class="price">$699.99</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card" data-id="3" data-name="Headphones" data-price="199.99">
+                    <div class="product-image">🎧</div>
+                    <h3>Wireless Headphones</h3>
+                    <p class="price">$199.99</p>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping Cart -->
+        <section class="cart">
+            <h2>Shopping Cart <span id="cart-count">(0)</span></h2>
+            <div id="cart-items" class="cart-items">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <strong>Total: $<span id="total-price">0.00</span></strong>
+            </div>
+        </section>
+
+        <!-- Checkout Form -->
+        <section class="checkout">
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="customer-name">Name:</label>
+                    <input type="text" id="customer-name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-email">Email:</label>
+                    <input type="text" id="customer-email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="discount-code">Discount Code:</label>
+                    <input type="text" id="discount-code" placeholder="Optional code e.g. SAVE10, SAVE15, SAVE20">
+                    <button type="button" id="apply-discount">Apply</button>
+                </div>
+
+                <button type="submit" id="checkout-btn">Complete Purchase</button>
+            </form>
+        </section>
+
+        <!-- Action Buttons -->
+        <section class="actions">
+            <button id="save-cart">💾 Save Cart</button>
+            <button id="load-cart">📂 Load Cart</button>
+            <button id="clear-cart">🗑️ Clear Cart</button>
+            <button id="export-cart">📤 Export Cart</button>
+        </section>
+
+        <!-- Error/Success Messages -->
+        <div id="message" class="message"></div>
+
+        <!-- Try-Catch Learning Guide -->
+        <section class="learning-guide">
+            <h3>🎯 Try-Catch Scenarios to Implement:</h3>
+            <div class="scenarios">
+                <div class="scenario">
+                    <h4>🔍 JSON Operations</h4>
+                    <ul>
+                        <li>Save/load cart from localStorage</li>
+                        <li>Parse discount codes</li>
+                        <li>Export cart data</li>
+                    </ul>
+                </div>
+
+                <div class="scenario">
+                    <h4>🧮 Calculations</h4>
+                    <ul>
+                        <li>Price calculations with discounts</li>
+                        <li>Tax calculations</li>
+                        <li>Quantity validations</li>
+                    </ul>
+                </div>
+
+                <div class="scenario">
+                    <h4>🎯 DOM Operations</h4>
+                    <ul>
+                        <li>Adding/removing cart items</li>
+                        <li>Updating quantities</li>
+                        <li>Form validations</li>
+                    </ul>
+                </div>
+
+                <div class="scenario">
+                    <h4>💾 Storage Operations</h4>
+                    <ul>
+                        <li>localStorage quota exceeded</li>
+                        <li>Corrupted cart data</li>
+                        <li>Browser storage disabled</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="shoppingCart.js">
+
+    </script>
+</body>
+</html>

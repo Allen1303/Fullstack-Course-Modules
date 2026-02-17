@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try-Catch Form Validator Practice</title>
+    <link rel="stylesheet" href="validation.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Try-Catch Practice</h1>
+            <p>Form Validation with Error Handling</p>
+        </div>
+
+        <!-- 📋 Form Validator HTML -->
+        <form onsubmit="event.preventDefault();">
+          <div class="input-group">
+            <div class="input-icon">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+            </div>
+            <input type="text" id="name" placeholder="Enter name" />
+          </div>
+          
+          <div class="input-group">
+            <div class="input-icon">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <input type="text" id="email" placeholder="Enter email" />
+          </div>
+          <button id="formBtn">Submit</button>
+          <p id="message"></p>
+        </form>
+
+        <div class="code-info">
+            <h3>🎯 Your Coding Challenge</h3>
+            <p>Create a <code>validateForm()</code> function that uses try-catch to handle form validation errors gracefully!</p>
+        </div>
+        <div class="requirements">
+            <h4>📋 Requirements:</h4>
+            <ul>
+                <li>Validate that name is not empty</li>
+                <li>Validate that email contains '@' symbol</li>
+                <li>Show success message when all validations pass</li>
+                <li>Show error messages when validations fail</li>
+                <li>Use green color for success, red for errors</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Add your JavaScript here or link to external file -->
+    <script src="validation.js"></script>
+</body>
+</html>

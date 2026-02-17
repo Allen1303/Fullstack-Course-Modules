@@ -1,0 +1,28 @@
+.exercise-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+input {
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+button {
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+}
+.display-area {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 2rem;
+}

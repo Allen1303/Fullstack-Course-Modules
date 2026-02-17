@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Status Toggle</title>
+<link rel="stylesheet" href="user-status.css">
+</head>
+<body>
+    <div class="status-app">
+        <div class="connection-indicator" id="connectionDot"></div>
+        <div class="network-waves" id="networkWaves">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        
+        <h2>👤 User Status</h2>
+        
+        <div class="status-container">
+            <p id="statusDisplay">Status: Offline 🔴</p>
+        </div>
+        
+        <button id="toggleBtn">Toggle Status</button>
+    </div>
+
+    <script src="user-status.js"></script>
+</body>
+</html>

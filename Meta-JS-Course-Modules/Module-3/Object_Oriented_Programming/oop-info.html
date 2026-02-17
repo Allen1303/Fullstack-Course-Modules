@@ -1,0 +1,776 @@
+<div class="code-container">
+<parameter>
+</invoke><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object-Oriented Programming & 4 Core Concepts Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #1e1e1e 0%, #0d1117 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #e6edf3;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            border: 1px solid #30363d;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #f7df1e, #ffd60a);
+            color: #1e1e1e;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #f7df1e;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #f7df1e, #ffd60a);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #1e1e1e;
+        }
+
+        .description {
+            font-size: 1.1em;
+            color: #c9d1d9;
+            margin-bottom: 25px;
+            background: rgba(22, 27, 34, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f7df1e;
+        }
+
+        .code-container {
+            background: #0d1117;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #30363d;
+        }
+
+        .code-header {
+            background: #161b22;
+            padding: 15px 20px;
+            color: #f7df1e;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        pre {
+            padding: 25px;
+            color: #e6edf3;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .keyword { color: #ff79c6; }
+        .string { color: #a5d6ff; }
+        .comment { color: #7c3aed; font-style: italic; }
+        .function { color: #ffd60a; }
+        .variable { color: #7ee787; }
+        .number { color: #79c0ff; }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .pillar-card {
+            background: rgba(22, 27, 34, 0.8);
+            color: #e6edf3;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            border: 1px solid #30363d;
+            transition: all 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-color: #f7df1e;
+        }
+
+        .pillar-card.encapsulation {
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .pillar-card.inheritance {
+            border-left: 4px solid #7ee787;
+        }
+
+        .pillar-card.polymorphism {
+            border-left: 4px solid #79c0ff;
+        }
+
+        .pillar-card.abstraction {
+            border-left: 4px solid #ffd60a;
+        }
+
+        .pillar-card h3 {
+            color: #f7df1e;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .warning {
+            background: rgba(255, 193, 7, 0.15);
+            border: 1px solid #ffd60a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning h4 {
+            color: #ffd60a;
+            margin-bottom: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #f7df1e 0%, #ffd60a 100%);
+            color: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(247, 223, 30, 0.3);
+        }
+
+        .tip-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .footer {
+            background: #161b22;
+            padding: 30px;
+            text-align: center;
+            color: #c9d1d9;
+            border-top: 1px solid #30363d;
+        }
+
+        .interactive-demo {
+            background: rgba(247, 223, 30, 0.1);
+            border: 2px solid #f7df1e;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            background: linear-gradient(45deg, #f7df1e, #ffd60a);
+            color: #1e1e1e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(247, 223, 30, 0.3);
+        }
+
+        .demo-output {
+            background: #0d1117;
+            color: #7ee787;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            min-height: 50px;
+            white-space: pre-line;
+            border: 1px solid #30363d;
+        }
+
+        .progress-bar {
+            background: rgba(22, 27, 34, 0.8);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(45deg, #f7df1e, #ffd60a);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .concept-counter {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .counter-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(22, 27, 34, 0.6);
+            border-radius: 10px;
+            min-width: 80px;
+            border: 1px solid #30363d;
+        }
+
+        .counter-number {
+            font-size: 2em;
+            color: #f7df1e;
+            font-weight: bold;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Object-Oriented Programming</h1>
+            <p>Master the 4 Core Concepts of OOP</p>
+        </div>
+
+        <div class="content">
+            <!-- Overview -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🏗️</div>
+                    What is OOP?
+                </h2>
+                <div class="description">
+                    <strong>Object-Oriented Programming (OOP)</strong> is a programming paradigm that organizes code around objects rather than functions. It models real-world entities as objects with properties (attributes) and behaviors (methods), making code more modular, reusable, and easier to maintain.
+                </div>
+
+                <div class="pillars-grid">
+                    <div class="pillar-card encapsulation">
+                        <h3>🔒 Encapsulation</h3>
+                        <p><strong>Bundling data and methods together</strong><br>
+                        Hide internal details and expose only necessary interfaces. Control access to object properties through methods.</p>
+                    </div>
+                    <div class="pillar-card inheritance">
+                        <h3>🧬 Inheritance</h3>
+                        <p><strong>Creating new classes based on existing ones</strong><br>
+                        Child classes inherit properties and methods from parent classes, promoting code reuse.</p>
+                    </div>
+                    <div class="pillar-card polymorphism">
+                        <h3>🎭 Polymorphism</h3>
+                        <p><strong>One interface, multiple implementations</strong><br>
+                        Objects of different types can be treated uniformly through a common interface.</p>
+                    </div>
+                    <div class="pillar-card abstraction">
+                        <h3>🎨 Abstraction</h3>
+                        <p><strong>Simplifying complex systems</strong><br>
+                        Hide implementation details and show only essential features to reduce complexity.</p>
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🔍</span> Basic Class Example
+                    </div>
+                    <pre><code><span class="comment">// Simple class definition</span>
+<span class="keyword">class</span> <span class="function">Car</span> {
+  <span class="function">constructor</span>(<span class="variable">make</span>, <span class="variable">model</span>) {
+    <span class="keyword">this</span>.<span class="variable">make</span> = <span class="variable">make</span>;
+    <span class="keyword">this</span>.<span class="variable">model</span> = <span class="variable">model</span>;
+    <span class="keyword">this</span>.<span class="variable">isRunning</span> = <span class="keyword">false</span>;
+  }
+
+  <span class="function">start</span>() {
+    <span class="keyword">this</span>.<span class="variable">isRunning</span> = <span class="keyword">true</span>;
+    <span class="keyword">return</span> <span class="string">`</span><span class="variable">${this.make}</span><span class="string"> </span><span class="variable">${this.model}</span><span class="string"> started!`</span>;
+  }
+
+  <span class="function">getInfo</span>() {
+    <span class="keyword">return</span> <span class="string">`</span><span class="variable">${this.make}</span><span class="string"> </span><span class="variable">${this.model}</span><span class="string">`</span>;
+  }
+}
+
+<span class="comment">// Create and use objects</span>
+<span class="keyword">const</span> <span class="variable">myCar</span> = <span class="keyword">new</span> <span class="function">Car</span>(<span class="string">'Toyota'</span>, <span class="string">'Camry'</span>);
+<span class="function">console</span>.<span class="function">log</span>(<span class="variable">myCar</span>.<span class="function">start</span>()); <span class="comment">// Toyota Camry started!</span></code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>🚘 Try it yourself! Interactive Car Demo</h4>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="createCar()">Create Car</button>
+                        <button class="demo-btn" onclick="startCar()">Start Engine</button>
+                        <button class="demo-btn" onclick="getCarInfo()">Get Info</button>
+                        <button class="demo-btn" onclick="clearDemo()">Clear</button>
+                    </div>
+                    <div class="demo-output" id="car-demo-output">Click "Create Car" to begin!</div>
+                </div>
+
+                <script>
+                    // Car class definition for the demo
+                    class Car {
+                        constructor(make, model) {
+                            this.make = make;
+                            this.model = model;
+                            this.isRunning = false;
+                        }
+
+                        start() {
+                            this.isRunning = true;
+                            return `${this.make} ${this.model} started!`;
+                        }
+
+                        getInfo() {
+                            return `${this.make} ${this.model}`;
+                        }
+                    }
+
+                    // Global variable to hold our car instance
+                    let demoCar = null;
+
+                    function createCar() {
+                        const makes = ['Toyota', 'Honda', 'Ford', 'BMW', 'Tesla'];
+                        const models = ['Camry', 'Civic', 'F-150', 'X3', 'Model 3'];
+                        
+                        const randomMake = makes[Math.floor(Math.random() * makes.length)];
+                        const randomModel = models[Math.floor(Math.random() * models.length)];
+                        
+                        demoCar = new Car(randomMake, randomModel);
+                        
+                        const output = document.getElementById('car-demo-output');
+                        output.textContent = `✅ Created new car: ${demoCar.getInfo()}\nStatus: Engine off`;
+                    }
+
+                    function startCar() {
+                        const output = document.getElementById('car-demo-output');
+                        
+                        if (!demoCar) {
+                            output.textContent = '❌ No car created yet! Click "Create Car" first.';
+                            return;
+                        }
+                        
+                        if (demoCar.isRunning) {
+                            output.textContent = `⚠️ ${demoCar.getInfo()} is already running!`;
+                            return;
+                        }
+                        
+                        const result = demoCar.start();
+                        output.textContent = `🚗 ${result}\nStatus: Engine running`;
+                    }
+
+                    function getCarInfo() {
+                        const output = document.getElementById('car-demo-output');
+                        
+                        if (!demoCar) {
+                            output.textContent = '❌ No car created yet! Click "Create Car" first.';
+                            return;
+                        }
+                        
+                        const status = demoCar.isRunning ? 'Engine running' : 'Engine off';
+                        output.textContent = `ℹ️ Car Info:\nMake: ${demoCar.make}\nModel: ${demoCar.model}\nStatus: ${status}`;
+                    }
+
+                    function clearDemo() {
+                        demoCar = null;
+                        const output = document.getElementById('car-demo-output');
+                        output.textContent = 'Click "Create Car" to begin!';
+                    }
+                </script>
+            </div>
+
+            <!-- Encapsulation -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🔒</div>
+                    Encapsulation
+                </h2>
+                <div class="description">
+                    Encapsulation bundles data and methods together while restricting direct access to internal components. It's like having a TV remote - you can change channels without knowing the internal circuitry.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🔐</span> Private Fields & Controlled Access
+                    </div>
+                    <pre><code><span class="keyword">class</span> <span class="function">BankAccount</span> {
+  <span class="comment">// Private fields</span>
+  <span class="variable">#balance</span> = <span class="number">0</span>;
+  
+  <span class="function">constructor</span>(<span class="variable">initialBalance</span>) {
+    <span class="keyword">this</span>.<span class="variable">#balance</span> = <span class="variable">initialBalance</span>;
+  }
+
+  <span class="function">deposit</span>(<span class="variable">amount</span>) {
+    <span class="keyword">if</span> (<span class="variable">amount</span> > <span class="number">0</span>) {
+      <span class="keyword">this</span>.<span class="variable">#balance</span> += <span class="variable">amount</span>;
+      <span class="keyword">return</span> <span class="string">`Deposited $</span><span class="variable">${amount}</span><span class="string">`</span>;
+    }
+  }
+
+  <span class="function">withdraw</span>(<span class="variable">amount</span>) {
+    <span class="keyword">if</span> (<span class="variable">amount</span> <= <span class="keyword">this</span>.<span class="variable">#balance</span>) {
+      <span class="keyword">this</span>.<span class="variable">#balance</span> -= <span class="variable">amount</span>;
+      <span class="keyword">return</span> <span class="string">`Withdrew $</span><span class="variable">${amount}</span><span class="string">`</span>;
+    }
+  }
+
+  <span class="keyword">get</span> <span class="function">balance</span>() {
+    <span class="keyword">return</span> <span class="keyword">this</span>.<span class="variable">#balance</span>;
+  }
+}
+
+<span class="keyword">const</span> <span class="variable">account</span> = <span class="keyword">new</span> <span class="function">BankAccount</span>(<span class="number">1000</span>);
+<span class="variable">account</span>.<span class="function">deposit</span>(<span class="number">500</span>);
+<span class="function">console</span>.<span class="function">log</span>(<span class="variable">account</span>.<span class="variable">balance</span>); <span class="comment">// 1500</span>
+<span class="comment">// account.#balance = 999; // ❌ Can't access directly</span></code></pre>
+                </div>
+            </div>
+
+            <!-- Inheritance -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🧬</div>
+                    Inheritance
+                </h2>
+                <div class="description">
+                    Inheritance allows creating new classes based on existing ones. Child classes inherit properties and methods from parent classes while being able to add their own unique features.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>👨‍👦</span> Parent and Child Classes
+                    </div>
+                    <pre><code><span class="comment">// Parent class</span>
+<span class="keyword">class</span> <span class="function">Animal</span> {
+  <span class="function">constructor</span>(<span class="variable">name</span>) {
+    <span class="keyword">this</span>.<span class="variable">name</span> = <span class="variable">name</span>;
+  }
+
+  <span class="function">eat</span>() {
+    <span class="keyword">return</span> <span class="string">`</span><span class="variable">${this.name}</span><span class="string"> is eating`</span>;
+  }
+
+  <span class="function">makeSound</span>() {
+    <span class="keyword">return</span> <span class="string">`</span><span class="variable">${this.name}</span><span class="string"> makes a sound`</span>;
+  }
+}
+
+<span class="comment">// Child class</span>
+<span class="keyword">class</span> <span class="function">Dog</span> <span class="keyword">extends</span> <span class="function">Animal</span> {
+  <span class="function">constructor</span>(<span class="variable">name</span>, <span class="variable">breed</span>) {
+    <span class="keyword">super</span>(<span class="variable">name</span>); <span class="comment">// Call parent constructor</span>
+    <span class="keyword">this</span>.<span class="variable">breed</span> = <span class="variable">breed</span>;
+  }
+
+  <span class="comment">// Override parent method</span>
+  <span class="function">makeSound</span>() {
+    <span class="keyword">return</span> <span class="string">`</span><span class="variable">${this.name}</span><span class="string"> barks: Woof!`</span>;
+  }
+
+  <span class="comment">// New method</span>
+  <span class="function">fetch</span>() {
+    <span class="keyword">return</span> <span class="string">`</span><span class="variable">${this.name}</span><span class="string"> fetches the ball!`</span>;
+  }
+}
+
+<span class="keyword">const</span> <span class="variable">dog</span> = <span class="keyword">new</span> <span class="function">Dog</span>(<span class="string">'Buddy'</span>, <span class="string">'Golden Retriever'</span>);
+<span class="function">console</span>.<span class="function">log</span>(<span class="variable">dog</span>.<span class="function">eat</span>()); <span class="comment">// Buddy is eating (inherited)</span>
+<span class="function">console</span>.<span class="function">log</span>(<span class="variable">dog</span>.<span class="function">makeSound</span>()); <span class="comment">// Buddy barks: Woof! (overridden)</span>
+<span class="function">console</span>.<span class="function">log</span>(<span class="variable">dog</span>.<span class="function">fetch</span>()); <span class="comment">// Buddy fetches the ball! (new)</span></code></pre>
+                </div>
+            </div>
+
+            <!-- Polymorphism -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🎭</div>
+                    Polymorphism
+                </h2>
+                <div class="description">
+                    Polymorphism allows objects of different types to be treated uniformly through a common interface. The same method call can produce different behaviors depending on the object type.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🔄</span> One Interface, Multiple Behaviors
+                    </div>
+                    <pre><code><span class="keyword">class</span> <span class="function">Shape</span> {
+  <span class="function">calculateArea</span>() {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'Must be implemented'</span>);
+  }
+}
+
+<span class="keyword">class</span> <span class="function">Circle</span> <span class="keyword">extends</span> <span class="function">Shape</span> {
+  <span class="function">constructor</span>(<span class="variable">radius</span>) {
+    <span class="keyword">super</span>();
+    <span class="keyword">this</span>.<span class="variable">radius</span> = <span class="variable">radius</span>;
+  }
+
+  <span class="function">calculateArea</span>() {
+    <span class="keyword">return</span> <span class="function">Math</span>.<span class="variable">PI</span> * <span class="keyword">this</span>.<span class="variable">radius</span> ** <span class="number">2</span>;
+  }
+}
+
+<span class="keyword">class</span> <span class="function">Rectangle</span> <span class="keyword">extends</span> <span class="function">Shape</span> {
+  <span class="function">constructor</span>(<span class="variable">width</span>, <span class="variable">height</span>) {
+    <span class="keyword">super</span>();
+    <span class="keyword">this</span>.<span class="variable">width</span> = <span class="variable">width</span>;
+    <span class="keyword">this</span>.<span class="variable">height</span> = <span class="variable">height</span>;
+  }
+
+  <span class="function">calculateArea</span>() {
+    <span class="keyword">return</span> <span class="keyword">this</span>.<span class="variable">width</span> * <span class="keyword">this</span>.<span class="variable">height</span>;
+  }
+}
+
+<span class="comment">// Polymorphism in action</span>
+<span class="keyword">const</span> <span class="variable">shapes</span> = [
+  <span class="keyword">new</span> <span class="function">Circle</span>(<span class="number">5</span>),
+  <span class="keyword">new</span> <span class="function">Rectangle</span>(<span class="number">4</span>, <span class="number">6</span>)
+];
+
+<span class="variable">shapes</span>.<span class="function">forEach</span>(<span class="variable">shape</span> => {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="string">`Area: </span><span class="variable">${shape.calculateArea()}</span><span class="string">`</span>);
+});</code></pre>
+                </div>
+            </div>
+
+            <!-- Abstraction -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🎨</div>
+                    Abstraction
+                </h2>
+                <div class="description">
+                    Abstraction hides complex implementation details and exposes only the essential features. It's like driving a car - you don't need to understand the engine internals to operate the vehicle.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🎯</span> Abstract Classes & Hidden Complexity
+                    </div>
+                    <pre><code><span class="comment">// Abstract base class</span>
+<span class="keyword">class</span> <span class="function">Database</span> {
+  <span class="function">constructor</span>() {
+    <span class="keyword">if</span> (<span class="keyword">this</span>.<span class="function">constructor</span> === <span class="function">Database</span>) {
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'Cannot instantiate abstract class'</span>);
+    }
+  }
+
+  <span class="function">connect</span>() { <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'Must implement'</span>); }
+  <span class="function">query</span>(<span class="variable">sql</span>) { <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'Must implement'</span>); }
+}
+
+<span class="comment">// Concrete implementation</span>
+<span class="keyword">class</span> <span class="function">MySQL</span> <span class="keyword">extends</span> <span class="function">Database</span> {
+  <span class="function">connect</span>() {
+    <span class="comment">// Complex connection logic hidden</span>
+    <span class="keyword">return</span> <span class="string">'Connected to MySQL'</span>;
+  }
+
+  <span class="function">query</span>(<span class="variable">sql</span>) {
+    <span class="comment">// Complex query processing hidden</span>
+    <span class="keyword">return</span> <span class="string">`Executing: </span><span class="variable">${sql}</span><span class="string">`</span>;
+  }
+}
+
+<span class="comment">// High-level service uses simple interface</span>
+<span class="keyword">class</span> <span class="function">UserService</span> {
+  <span class="function">constructor</span>(<span class="variable">db</span>) {
+    <span class="keyword">this</span>.<span class="variable">db</span> = <span class="variable">db</span>;
+  }
+
+  <span class="function">getUsers</span>() {
+    <span class="keyword">this</span>.<span class="variable">db</span>.<span class="function">connect</span>();
+    <span class="keyword">return</span> <span class="keyword">this</span>.<span class="variable">db</span>.<span class="function">query</span>(<span class="string">'SELECT * FROM users'</span>);
+  }
+}
+
+<span class="keyword">const</span> <span class="variable">service</span> = <span class="keyword">new</span> <span class="function">UserService</span>(<span class="keyword">new</span> <span class="function">MySQL</span>());
+<span class="function">console</span>.<span class="function">log</span>(<span class="variable">service</span>.<span class="function">getUsers</span>());</code></pre>
+                </div>
+            </div>
+
+            <!-- Best Practices -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">💡</div>
+                    OOP Best Practices
+                </h2>
+                
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>🎯 Single Responsibility</h4>
+                        <p>Each class should have one reason to change. Keep classes focused on a single task.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🔒 Favor Composition</h4>
+                        <p>Prefer object composition over inheritance when possible for more flexibility.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📋 Program to Interfaces</h4>
+                        <p>Depend on abstractions, not concrete implementations for better maintainability.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🔄 Open/Closed Principle</h4>
+                        <p>Classes should be open for extension but closed for modification.</p>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h4>⚠️ Common Pitfalls to Avoid</h4>
+                    <p>• <strong>God Objects:</strong> Classes that do too much<br>
+                    • <strong>Deep Inheritance:</strong> Avoid chains more than 3-4 levels deep<br>
+                    • <strong>Breaking Encapsulation:</strong> Don't expose internal state unnecessarily<br>
+                    • <strong>Tight Coupling:</strong> Classes shouldn't depend heavily on each other's internals</p>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🎓</div>
+                    Summary
+                </h2>
+                <div class="description">
+                    Object-Oriented Programming provides a powerful way to organize and structure code by modeling real-world concepts as objects. The four core principles work together to create maintainable, scalable, and reusable software systems.
+                </div>
+
+                <div class="pillars-grid">
+                    <div class="pillar-card encapsulation">
+                        <h3>🔒 Encapsulation</h3>
+                        <p><strong>Bundle data and methods, control access</strong><br>
+                        Use private fields and getters/setters to protect data integrity.</p>
+                    </div>
+                    <div class="pillar-card inheritance">
+                        <h3>🧬 Inheritance</h3>
+                        <p><strong>Extend existing classes, promote reuse</strong><br>
+                        Create specialized classes that inherit base functionality.</p>
+                    </div>
+                    <div class="pillar-card polymorphism">
+                        <h3>🎭 Polymorphism</h3>
+                        <p><strong>Same interface, different behaviors</strong><br>
+                        Write flexible code that works with multiple object types.</p>
+                    </div>
+                    <div class="pillar-card abstraction">
+                        <h3>🎨 Abstraction</h3>
+                        <p><strong>Hide complexity, expose essentials</strong><br>
+                        Create clear interfaces that hide implementation details.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🚀 <strong>Ready to practice?</strong> Start building your own classes and implementing these OOP principles!</p>
+            <p>Remember: Good OOP design makes code easier to understand, maintain, and extend.</p>
+        </div>
+    </div>
+</body>
+</html>

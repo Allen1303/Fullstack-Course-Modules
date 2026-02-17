@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.jsonp2-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  color: #4a5568;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.jsonp2-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+  font-style: italic;
+}
+
+.jsonp2-objective {
+  background: #f7fafc;
+  border-left: 4px solid #667eea;
+  padding: 15px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+.jsonp2-objective h3 {
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.jsonp2-objective p {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.jsonp2-input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: "Courier New", monospace;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.jsonp2-result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+}
+
+.jsonp2-success {
+  background-color: #f0fff4;
+  color: #22543d;
+  border: 1px solid #9ae6b4;
+}
+
+.jsonp2-error {
+  background-color: #fed7d7;
+  color: #742a2a;
+  border: 1px solid #feb2b2;
+}
+
+.jsonp2-info {
+  background-color: #ebf8ff;
+  color: #2a4365;
+  border: 1px solid #90cdf4;
+}
+
+.jsonp2-test-samples {
+  background: #f7fafc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.jsonp2-test-samples h4 {
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+.jsonp2-sample-button {
+  background: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  padding: 8px 12px;
+  margin: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.jsonp2-sample-button:hover {
+  background: #cbd5e0;
+}

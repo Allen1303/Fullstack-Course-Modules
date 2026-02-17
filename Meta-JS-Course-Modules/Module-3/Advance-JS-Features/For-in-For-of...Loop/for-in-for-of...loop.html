@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript for...in and for...of Loops Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(40, 40, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border: 1px solid #444;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #f7df1e, #e6c200);
+            color: #1a1a1a;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #f7df1e;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #f7df1e, #e6c200);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #1a1a1a;
+        }
+
+        .description {
+            font-size: 1.1em;
+            color: #c0c0c0;
+            margin-bottom: 25px;
+            background: rgba(60, 60, 60, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f7df1e;
+        }
+
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-header {
+            background: #2d2d2d;
+            padding: 15px 20px;
+            color: #f7df1e;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        pre {
+            padding: 25px;
+            color: #f8f8f2;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; font-style: italic; }
+        .function { color: #50fa7b; }
+        .variable { color: #8be9fd; }
+        .number { color: #bd93f9; }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .comparison-card {
+            background: rgba(60, 60, 60, 0.8);
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #555;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: #f7df1e;
+        }
+
+        .comparison-card.for-in {
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .comparison-card.for-of {
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .comparison-card h3 {
+            color: #f7df1e;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .warning {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning h4 {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #f7df1e 0%, #e6c200 100%);
+            color: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(247, 223, 30, 0.3);
+        }
+
+        .tip-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>for...in vs for...of Loops</h1>
+            <p>Master JavaScript's powerful iteration methods</p>
+        </div>
+
+        <div class="content">
+            <!-- Overview -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🔄</div>
+                    Quick Overview
+                </h2>
+                <div class="description">
+                    <strong>for...in</strong> iterates over enumerable properties (keys) of objects, while <strong>for...of</strong> iterates over iterable values like arrays and strings.
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card for-in">
+                        <h3>🏗️ for...in Loop</h3>
+                        <p><strong>Iterates:</strong> Object properties (keys)<br>
+                        <strong>Best for:</strong> Objects<br>
+                        <strong>Returns:</strong> Property names as strings<br>
+                        <strong>Gotcha:</strong> Includes inherited properties</p>
+                    </div>
+                    <div class="comparison-card for-of">
+                        <h3>📋 for...of Loop</h3>
+                        <p><strong>Iterates:</strong> Iterable values<br>
+                        <strong>Best for:</strong> Arrays, strings, Maps, Sets<br>
+                        <strong>Returns:</strong> Actual values<br>
+                        <strong>Gotcha:</strong> Doesn't work with plain objects</p>
+                    </div>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🔍</span> Basic Comparison
+                    </div>
+                    <pre><code><span class="keyword">const</span> <span class="variable">fruits</span> = [<span class="string">'apple'</span>, <span class="string">'banana'</span>, <span class="string">'orange'</span>];
+
+<span class="comment">// for...in loops through indices (keys)</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">index</span> <span class="keyword">in</span> <span class="variable">fruits</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">index</span>, <span class="variable">fruits</span>[<span class="variable">index</span>]); 
+  <span class="comment">// Output: 0 apple, 1 banana, 2 orange</span>
+}
+
+<span class="comment">// for...of loops through values directly</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">fruit</span> <span class="keyword">of</span> <span class="variable">fruits</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">fruit</span>); 
+  <span class="comment">// Output: apple, banana, orange</span>
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- for...in Deep Dive -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🏗️</div>
+                    for...in Loop
+                </h2>
+                <div class="description">
+                    Perfect for iterating over object properties when you need both keys and values.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🔑</span> Object Iteration
+                    </div>
+                    <pre><code><span class="keyword">const</span> <span class="variable">person</span> = {
+  <span class="variable">name</span>: <span class="string">'Alice'</span>,
+  <span class="variable">age</span>: <span class="number">30</span>,
+  <span class="variable">city</span>: <span class="string">'New York'</span>
+};
+
+<span class="comment">// ✅ SAFE: Always use hasOwnProperty()</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">key</span> <span class="keyword">in</span> <span class="variable">person</span>) {
+  <span class="keyword">if</span> (<span class="variable">person</span>.<span class="function">hasOwnProperty</span>(<span class="variable">key</span>)) {
+    <span class="function">console</span>.<span class="function">log</span>(<span class="string">`</span><span class="variable">${key}</span><span class="string">: </span><span class="variable">${person[key]}</span><span class="string">`</span>);
+  }
+}
+
+<span class="comment">// ✅ MODERN: Use Object.hasOwn() (ES2022)</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">key</span> <span class="keyword">in</span> <span class="variable">person</span>) {
+  <span class="keyword">if</span> (<span class="function">Object</span>.<span class="function">hasOwn</span>(<span class="variable">person</span>, <span class="variable">key</span>)) {
+    <span class="function">console</span>.<span class="function">log</span>(<span class="string">`</span><span class="variable">${key}</span><span class="string">: </span><span class="variable">${person[key]}</span><span class="string">`</span>);
+  }
+}</code></pre>
+                </div>
+
+                <div class="warning">
+                    <h4>⚠️ Array Gotcha</h4>
+                    <p>Using <code>for...in</code> with arrays can include custom properties. Prefer <code>for...of</code> for arrays unless you specifically need to check properties.</p>
+                </div>
+            </div>
+
+            <!-- for...of Deep Dive -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">📋</div>
+                    for...of Loop
+                </h2>
+                <div class="description">
+                    The modern, clean way to iterate over arrays, strings, Maps, Sets, and other iterables.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🎯</span> Iterable Examples
+                    </div>
+                    <pre><code><span class="comment">// Arrays - clean and simple</span>
+<span class="keyword">const</span> <span class="variable">numbers</span> = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>];
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">num</span> <span class="keyword">of</span> <span class="variable">numbers</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">num</span> * <span class="number">2</span>);
+}
+
+<span class="comment">// Strings - character by character</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">char</span> <span class="keyword">of</span> <span class="string">'Hello'</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">char</span>); <span class="comment">// H, e, l, l, o</span>
+}
+
+<span class="comment">// Get index + value with entries()</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> [<span class="variable">index</span>, <span class="variable">value</span>] <span class="keyword">of</span> <span class="variable">numbers</span>.<span class="function">entries</span>()) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="string">`</span><span class="variable">${index}</span><span class="string">: </span><span class="variable">${value}</span><span class="string">`</span>);
+}
+
+<span class="comment">// Maps and Sets</span>
+<span class="keyword">const</span> <span class="variable">map</span> = <span class="keyword">new</span> <span class="function">Map</span>([[<span class="string">'a'</span>, <span class="number">1</span>], [<span class="string">'b'</span>, <span class="number">2</span>]]);
+<span class="keyword">for</span> (<span class="keyword">const</span> [<span class="variable">key</span>, <span class="variable">value</span>] <span class="keyword">of</span> <span class="variable">map</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="string">`</span><span class="variable">${key}</span><span class="string">: </span><span class="variable">${value}</span><span class="string">`</span>);
+}
+
+<span class="keyword">const</span> <span class="variable">set</span> = <span class="keyword">new</span> <span class="function">Set</span>([<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>]);
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">color</span> <span class="keyword">of</span> <span class="variable">set</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">color</span>);
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Decision Guide -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🎯</div>
+                    Quick Decision Guide
+                </h2>
+                <div class="description">
+                    Choose the right loop based on your data structure and needs.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>🤔</span> When to Use Which
+                    </div>
+                    <pre><code><span class="comment">// ✅ Use for...in for objects</span>
+<span class="keyword">const</span> <span class="variable">obj</span> = { <span class="variable">a</span>: <span class="number">1</span>, <span class="variable">b</span>: <span class="number">2</span> };
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">key</span> <span class="keyword">in</span> <span class="variable">obj</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">key</span>, <span class="variable">obj</span>[<span class="variable">key</span>]);
+}
+
+<span class="comment">// ✅ Use for...of for arrays</span>
+<span class="keyword">const</span> <span class="variable">arr</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">value</span> <span class="keyword">of</span> <span class="variable">arr</span>) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">value</span>);
+}
+
+<span class="comment">// ✅ Object iteration with for...of</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">key</span> <span class="keyword">of</span> <span class="function">Object</span>.<span class="function">keys</span>(<span class="variable">obj</span>)) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">key</span>);
+}
+
+<span class="keyword">for</span> (<span class="keyword">const</span> [<span class="variable">key</span>, <span class="variable">value</span>] <span class="keyword">of</span> <span class="function">Object</span>.<span class="function">entries</span>(<span class="variable">obj</span>)) {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="variable">key</span>, <span class="variable">value</span>);
+}
+
+<span class="comment">// ❌ Avoid: for...in with arrays (usually wrong)</span>
+<span class="comment">// ❌ Error: for...of with plain objects</span></code></pre>
+                </div>
+
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>🚀 Best Practices</h4>
+                        <p>• Use hasOwnProperty() with for...in<br>
+                        • Prefer for...of for arrays<br>
+                        • Use Object.entries() for object iteration<br>
+                        • Consider Array methods (map, filter)</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>⚠️ Common Mistakes</h4>
+                        <p>• Using for...in with arrays<br>
+                        • Using for...of with plain objects<br>
+                        • Forgetting hasOwnProperty()<br>
+                        • Not considering inherited properties</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="section">
+                <h2>
+                    <div class="section-icon">⚡</div>
+                    Performance Notes
+                </h2>
+                <div class="description">
+                    Quick performance insights for optimal loop choice.
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>⚡</span> Performance Tips
+                    </div>
+                    <pre><code><span class="comment">// Fastest to slowest for arrays:</span>
+<span class="comment">// 1. Traditional for loop (fastest)</span>
+<span class="keyword">for</span> (<span class="keyword">let</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> < <span class="variable">arr</span>.<span class="variable">length</span>; <span class="variable">i</span>++) { }
+
+<span class="comment">// 2. for...of (good performance, clean syntax)</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">item</span> <span class="keyword">of</span> <span class="variable">arr</span>) { }
+
+<span class="comment">// 3. forEach (functional, readable)</span>
+<span class="variable">arr</span>.<span class="function">forEach</span>(<span class="variable">item</span> => { });
+
+<span class="comment">// 4. for...in (avoid for arrays)</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">index</span> <span class="keyword">in</span> <span class="variable">arr</span>) { }
+
+<span class="comment">// Cache array length for best performance</span>
+<span class="keyword">for</span> (<span class="keyword">let</span> <span class="variable">i</span> = <span class="number">0</span>, <span class="variable">len</span> = <span class="variable">arr</span>.<span class="variable">length</span>; <span class="variable">i</span> < <span class="variable">len</span>; <span class="variable">i</span>++) {
+  <span class="comment">// Fastest for large arrays</span>
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="for-in...loop.js"></script>
+    <script src="for-of...loop.js"></script>
+</body>
+</html>

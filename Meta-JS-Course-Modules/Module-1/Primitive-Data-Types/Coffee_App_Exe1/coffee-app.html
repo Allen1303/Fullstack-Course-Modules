@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Total Price Calculator</title>
+<link rel="stylesheet" href="coffee-app.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="steam"></div>
+    <div class="steam"></div>
+    <div class="steam"></div>
+    
+    <h2>☕ Coffee Total Calculator</h2>
+    
+    <label for="priceInput">Price per Cup ($):</label>
+    <div class="input-group">
+      <span class="input-icon">💰</span>
+      <input type="number" id="priceInput" placeholder="e.g., 3.5" />
+    </div>
+    
+    <label for="qtyInput">Quantity:</label>
+    <div class="input-group">
+      <span class="input-icon">🔢</span>
+      <input type="number" id="qtyInput" placeholder="e.g., 2" />
+    </div>
+    
+    <button id="calcBtn">Calculate Total</button>
+    
+    <div class="result-section">
+      <p>Total Price:</p>
+      <div class="total-display">$<span id="totalOutput">0.00</span></div>
+    </div>
+  </div>
+
+  <script src="coffee-app.js"></script>
+  </script>
+</body>
+</html>

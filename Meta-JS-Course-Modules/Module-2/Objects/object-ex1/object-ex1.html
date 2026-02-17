@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Practice 1: Simple Profile</title>
+    <link rel="stylesheet" href="object-ex1.css">
+</head>
+
+<body>
+    <div class="exercise-container">
+        <header>
+            <h1>📝 Profile Manager</h1>
+            <p class="subtitle">Create and manage your profile object</p>
+        </header>
+        <main class="input-section">
+            <div class="input-group">
+                <label for="nameInput">👤 Name</label>
+                <input type="text" id="nameInput" placeholder="Enter your name">
+            </div>
+            <div class="input-group">
+                <label for="ageInput">🎂 Age</label>
+                <input type="number" id="ageInput" placeholder="Enter your age">
+            </div>
+            <div class="button-group">
+                <button id="profileBtn" class="primary-btn">Show Profile</button>
+                <button id="clearBtn" class="secondary-btn">Clear</button>
+            </div>
+        </main>
+        <section class="output-section">
+            <h3>Profile Object:</h3>
+            <div id="profileResult" class="output-display"></div>
+        </section>
+    </div>
+    <script src="object-ex1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Receipt Generator</title>
+  <link rel="stylesheet" href="receipt-app.css">
+</head>
+<body>
+  <div class="app">
+    <div class="store-info">
+      QUICK MART<br>
+      123 Main Street<br>
+      City, State 12345
+    </div>
+    <h1>Receipt Preview</h1>
+    <button id="generateBtn">Generate Receipt</button>
+    <ul id="receiptList">
+      <!-- Receipt lines will be injected here -->
+    </ul>
+    <p id="receipt-total" ></p>
+     <span id="total-label"></span>
+      <span id="total-amount"></span>
+    <div class="receipt-footer">
+      Date: <span id="currentDate"></span><br>
+      Time: <span id="currentTime"></span>
+    </div>
+    <div class="thank-you">Thank You!</div>
+  </div>
+
+  <script src="receipt-app.js"></script>
+  </script>
+</body>
+</html>

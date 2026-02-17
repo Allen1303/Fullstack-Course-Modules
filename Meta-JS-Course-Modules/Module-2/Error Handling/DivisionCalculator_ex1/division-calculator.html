@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1: Division Calculator (Ex-1_DivisionCalculator)</title>
+    <link rel="stylesheet" href="division-calculator.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧮 Division Calculator <span style="font-size:1rem; font-weight:normal;">(Ex-1_DivisionCalculator)</span>
+        </h1>
+
+        <div class="info">
+            <strong>Exercise Goal:</strong> Learn basic try-catch error handling<br>
+            <strong>What you'll learn:</strong> Handling division by zero, invalid inputs, and custom error messages
+        </div>
+
+        <div class="input-group">
+            <label for="number1">First Number:</label>
+            <input type="text" id="number1" placeholder="Enter first number (e.g., 10)">
+        </div>
+
+        <div class="input-group">
+            <label for="number2">Second Number:</label>
+            <input type="text" id="number2" placeholder="Enter second number (e.g., 2)">
+        </div>
+
+        <button id="calculateBtn">Calculate Division</button>
+
+        <div id="result" class="result"></div>
+
+        <div class="code-hint">
+            <strong>Try these test cases:</strong><br>
+            • 10 ÷ 2 (normal case)<br>
+            • 10 ÷ 0 (division by zero)<br>
+            • abc ÷ 5 (invalid input)<br>
+            • 15 ÷ def (invalid input)<br>
+            • Leave fields empty
+        </div>
+
+        <div class="ex1">
+            <h2>ex1: Write the safeDivision function</h2>
+            <p>Write a function called <code>safeDivision(a, b)</code> that:</p>
+            <ul>
+                <li>Uses <strong>try/catch</strong> to handle errors.</li>
+                <li>Throws an error if either input is not a valid number.</li>
+                <li>Throws an error if the second input (b) is zero.</li>
+                <li>Throws an error if either input is empty.</li>
+                <li>Returns the result of dividing a by b if all checks pass.</li>
+            </ul>
+            <p>Connect this function to the UI so the result or error message is displayed above.</p>
+        </div>
+    </div>
+
+    <script src="division-calculator.js"></script>
+</body>
+
+</html>
