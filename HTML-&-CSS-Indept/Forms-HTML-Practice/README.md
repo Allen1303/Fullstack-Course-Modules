@@ -93,9 +93,3 @@ By deploying a Google Apps Script as a Web App, I transformed a standard spreads
 
 - Frontend Mentor - [@Allen1303](https://www.frontendmentor.io/profile/Allen1303)
 - GitHub - [Allen1303](https://github.com/Allen1303)
-
----
-
-### Pro-Tip for your GitHub:
-
-Since your `SCRIPT_URL` is visible in your code, it's public. For a learning project, this is fine! But in the professional world, we usually hide these URLs using "Environment Variables." You've done a great job showing you understand the full-stack flow from **HTML → CSS → JS → External API.**
