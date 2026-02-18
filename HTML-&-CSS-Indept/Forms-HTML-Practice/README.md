@@ -1,6 +1,6 @@
 # Frontend Mentor - Contact Form Solution
 
-This is a solution to the [Contact Form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/contact-form--G-hY17_gnH). This project focused on building a responsive, accessible, and modern form using semantic HTML and custom CSS properties.
+This is a solution to the [Contact Form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/contact-form--G-hY17_gnH). This project is a fully functional contact form that captures user data and saves it to a **Google Sheet** using modern JavaScript.
 
 ## Table of contents
 
@@ -18,77 +18,76 @@ This is a solution to the [Contact Form challenge on Frontend Mentor](https://ww
 
 Users should be able to:
 
-- Complete the form and see a success message (if logic is added later)
-- Receive validation errors if fields are left empty or the email is formatted incorrectly
-- See hover and focus states for all interactive elements on the page
-- Use a layout that is optimized for their device's screen size
+- Complete the form and receive a success alert upon successful submission.
+- See hover and focus states for all interactive elements.
+- Receive validation errors if fields are empty (handled via HTML5 validation).
+- **Bonus:** Data is sent asynchronously to a Google Sheet database without reloading the page.
 
 ### Screenshot
 
 ![Project Screenshot](./screenshot.png)
-_(Note: Replace the path above with the actual name of your image file, e.g., ./assets/images/preview.png)_
+_(Update this path to your actual screenshot file)_
+<img src="./form.png" alt="Contact Form Screenshot" width="600">
 
 ## My process
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS Custom Properties (Variables)
-- Flexbox for layout alignment
-- Modern CSS selectors (e.g., `:has()`)
-- Mobile-first workflow
+- **HTML5:** Semantic markup for accessibility.
+- **CSS3:** Custom properties, Flexbox, and the modern `:has()` selector.
+- **JavaScript (ES6+):** Async/Await, Fetch API, and DOM Caching.
+- **Google Apps Script:** Used as a serverless backend to handle data storage.
 
 ### Key Concepts
 
-During this project, I focused on deep-diving into modern CSS layouts and form accessibility. Here are some of the key concepts used:
+#### 1. Efficient DOM Caching
 
-#### 1. Modern State Styling with `:has()`
+To optimize performance, all form elements are cached outside the event listener. This ensures the browser only "crawls" the DOM once when the script loads, rather than re-searching for elements every time the user clicks submit.
 
-I used the modern `:has()` pseudo-class to style the parent radio card container based on whether the child radio button is checked. This eliminates the need for JavaScript for simple UI state changes.
+```javascript
+// Cached once at the top level for better performance
+const contactForm = document.getElementById("contact-form");
+const firstNameInput = document.getElementById("first-name");
+const submitBtn = document.getElementById("submit-btn");
+```
+
+#### 2. Asynchronous Form Submission (`async/await`)
+
+I utilized an `async` helper function to handle the API request. This keeps the UI responsive and allows for a clean `try...catch...finally` flow to manage success and error states.
+
+```javascript
+async function submitForm(formData) {
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      mode: "no-cors", // Required for Google Apps Script cross-origin requests
+    });
+    alert("✅ Success! Your message has been sent.");
+  } catch (error) {
+    alert("❌ Oops! Something went wrong.");
+  } finally {
+    submitBtn.innerText = "Submit";
+    submitBtn.disabled = false;
+  }
+}
+```
+
+#### 3. Modern CSS Styling with `:has()`
+
+The form uses the modern `:has()` pseudo-class to style the parent container of a radio button when it is selected, providing a high-end feel without unnecessary JavaScript toggling.
 
 ```css
-/* Highlights the border of the card when the radio inside is selected */
+/* Highlights the card border only when the internal radio is checked */
 .radio-card:has(input:checked) {
   border-color: var(--medium-green);
+  background-color: var(--light-green);
 }
 ```
 
-#### 2. Flexible Form Grids
+#### 4. Google Sheets as a Backend
 
-To create a side-by-side layout for the First Name and Last Name fields while maintaining responsiveness, I utilized Flexbox with the `flex: 1` property.
-
-```css
-.form-container {
-  display: flex;
-  gap: 1rem;
-}
-
-.form-container .form-group {
-  flex: 1; /* Allows inputs to grow and fill the space equally */
-}
-```
-
-#### 3. Custom Form Accents
-
-Instead of using standard blue browser defaults, I used `accent-color` to match the brand colors of the design, providing a more cohesive look.
-
-```css
-input[type="radio"],
-input[type="checkbox"] {
-  accent-color: var(--medium-green);
-  width: 18px;
-  height: 18px;
-}
-```
-
-#### 4. Semantic Accessibility
-
-Every input is correctly paired with a `<label>` using the `for` and `id` attributes. This ensures that clicking the label focuses the input and makes the form readable for screen readers.
-
-```html
-<label for="first-name">First Name <span>*</span></label>
-<input type="text" id="first-name" name="first-name" required />
-```
+By deploying a Google Apps Script as a Web App, I transformed a standard spreadsheet into a functional database. The JavaScript `fetch` API sends the form data to the `/exec` endpoint, allowing for real-time data collection.
 
 ## Author
 
@@ -97,10 +96,6 @@ Every input is correctly paired with a `<label>` using the `for` and `id` attrib
 
 ---
 
-### How to use this:
+### Pro-Tip for your GitHub:
 
-1. Copy the text above.
-2. Create a file named `README.md` in your `HTML-&-CSS-Indept` folder.
-3. Paste the text.
-4. Make sure your screenshot is in the same folder and named `screenshot.png` (or update the link in the markdown).
-5. `git add .`, `git commit -m "docs: add readme"`, and `git push`!
+Since your `SCRIPT_URL` is visible in your code, it's public. For a learning project, this is fine! But in the professional world, we usually hide these URLs using "Environment Variables." You've done a great job showing you understand the full-stack flow from **HTML → CSS → JS → External API.**
