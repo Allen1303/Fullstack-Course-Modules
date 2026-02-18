@@ -12,7 +12,7 @@
         <h1 class="h1-text">Contact Us</h1>
       </div>
 
-      <form method="POST">
+      <form id="contact-form" method="POST">
         <div class="form-container">
           <div class="form-group">
             <label for="first-name">First Name <span>*</span></label>
@@ -33,19 +33,19 @@
           <p>Query Type <span>*</span></p>
 
           <div class="radio-group">
-            <label for="" class="radio-card">
+            <label for="general-btn" class="radio-card">
               <input
                 type="radio"
-                id="radio-btn"
+                id="general-btn"
                 name="query-type"
                 value="general"
               />
               General Enquiry
             </label>
-            <label for="" class="radio-card">
+            <label for="support-btn" class="radio-card">
               <input
                 type="radio"
-                id="radio-btn"
+                id="support-btn"
                 name="query-type"
                 value="support"
               />
@@ -58,13 +58,15 @@
           <textarea id="message" name="message" required></textarea>
         </div>
         <div class="consent-group">
-          <label for="concent">
-            <input type="checkbox" />I consent to being contacted by the team
+          <label for="concent-check">
+            <input type="checkbox" id="concent-check" />I consent to being
+            contacted by the team
             <span>*</span>
           </label>
         </div>
         <button type="submit">Submit</button>
       </form>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
