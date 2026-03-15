@@ -3,7 +3,7 @@ const Card = (props) => {
     <div className="card">
       <h1>This card's value is: {props.num}</h1>
       <p>This card is : {props.num > 50 ? "High" : "Low"}</p>
-    </div>;
+    </div>
   );
 };
 export default Card;
