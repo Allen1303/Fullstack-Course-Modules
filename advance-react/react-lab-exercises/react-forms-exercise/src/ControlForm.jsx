@@ -41,10 +41,10 @@ const ControlForm = () => {
       <form onSubmit={handleSubmit}>
         <fieldset>
           <h2>Sign Up Form</h2>
-          <div className="field"><label>First name:<sup>*</sup><input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} /></label></div>
-          <div className="field"><label>Last name:<sup></sup><input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} /></label></div>
-          <div className="field"><label>Email name:<sup>*</sup><input type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} /></label></div>
-          <div className="field"><label>Password<sup>*</sup><input type="password" placeholder="password" value={password.value} onChange={(e) => setPassword({ ...password, value: e.target.value })} onBlur={() => setPassword({ ...password, isTouched: true })} /></label>
+          <div className="field"><label>First name:<sup>*</sup></label><input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} /></div>
+          <div className="field"><label>Last name:<sup></sup></label><input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} /></div>
+          <div className="field"><label>Email name:<sup>*</sup></label><input type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} /></div>
+          <div className="field"><label>Password<sup>*</sup></label><input type="password" placeholder="password" value={password.value} onChange={(e) => setPassword({ ...password, value: e.target.value })} onBlur={() => setPassword({ ...password, isTouched: true })} />
             {password.isTouched && password.value.length < 5 ? (<PasswordError />) : null}
           </div>
           <div className="field"><label htmlFor="">Role<sup>*</sup></label>

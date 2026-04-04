@@ -12,12 +12,6 @@ function App() {
     borderRadius: "0.5rem",
     cursor: "pointer",
   };
-  //
-  // const containerStyle = {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // };
   const handleClick = () => {
     let randomNum = Math.floor(Math.random() * 5) + 1;
     // console.log(randomNum);
@@ -33,7 +27,7 @@ function App() {
         </button>
         {result && (
           <p>
-            Computer: <srpong>{randomNum}</srpong>, Your Guess:{" "}
+            Computer: <strong>{randomNum}</strong>, Your Guess:{" "}
             <strong>{userInput}</strong>
           </p>
         )}

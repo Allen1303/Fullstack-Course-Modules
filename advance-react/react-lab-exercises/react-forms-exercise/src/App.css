@@ -37,7 +37,7 @@ body {
   border-radius: 12px;
   padding: 2.5rem 2rem;
   width: 100%;
-  max-width: 420px;
+  max-width: 480px;
 }
 
 /* ── Fieldset ────────────────────────────────────────── */
@@ -54,21 +54,25 @@ h2 {
   letter-spacing: -0.02em;
   color: var(--text);
   margin-bottom: 0.25rem;
+  text-align: center;
 }
 
 /* ── Fields ──────────────────────────────────────────── */
 .field {
   display: flex;
   flex-direction: column;
+  /* ← label stacks above input */
   gap: 0.4rem;
 }
 
 .field label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  text-align: left;
+  /* ← sits top left of input */
 }
 
 .field input,
@@ -98,7 +102,7 @@ h2 {
 
 /* ── Error message ───────────────────────────────────── */
 .error__message {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--error);
   margin-top: 0.2rem;
 }
