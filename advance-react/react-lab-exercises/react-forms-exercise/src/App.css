@@ -1,0 +1,129 @@
+/* ── Tokens ─────────────────────────────────────────── */
+:root {
+  --bg: #f7f7f5;
+  --card: #ffffff;
+  --border: #e2e2e0;
+  --border-focus: #111111;
+  --text: #111111;
+  --text-muted: #888884;
+  --error: #c0392b;
+  --accent: #111111;
+  --radius: 6px;
+  --font: 'DM Sans', sans-serif;
+}
+
+/* ── Reset ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Card ────────────────────────────────────────────── */
+.form__container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ── Fieldset ────────────────────────────────────────── */
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+/* ── Fields ──────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--border-focus);
+  background: #fff;
+}
+
+.field sup {
+  color: var(--error);
+  margin-left: 2px;
+}
+
+/* ── Error message ───────────────────────────────────── */
+.error__message {
+  font-size: 0.78rem;
+  color: var(--error);
+  margin-top: 0.2rem;
+}
+
+/* ── Button ──────────────────────────────────────────── */
+button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
