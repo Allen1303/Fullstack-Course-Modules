@@ -1,11 +1,17 @@
 // Article Component that contains both Header and Paragraph components
 import Header from "./Header";
+import ToggleSwitch from "./ToggleSwitch"
 import Paragraph from "./Paragraph";
+import { useTheme } from "../hooks/useTheme"
 
-function Article() {
+function Article() { // Add theme prop
+  const { theme } = useTheme()
   return (
-    <article className=" shadow-md w-135 h-55 rounded-md p-4">
+    <article className={` relative shadow-lg w-175 h-75 rounded-md p-8 ${theme === "light" ? "bg-white" : "bg-slate-800"}`}>
       <Header />
+      <div className="absolute top-4 right-8">
+        <ToggleSwitch />
+      </div>
       <Paragraph />
     </article>
   );
