@@ -1,243 +1,411 @@
-# useContext Hook — Reference Guide
+# React useContext Hook — Quick Reference Guide
 
-## What Is It?
+## The Mental Model
 
-`useContext` is a React hook that lets you share data across multiple components
-without having to pass it as props through every layer.
-
-Think of it like a **radio broadcast** — one station transmits a signal,
-and any radio in range can tune in directly. No wires needed.
-
----
-
-## The Problem It Solves — Prop Drilling
-
-Without context, data has to be passed through every component layer
-even if they don't use it. This is called **prop drilling**.
+useContext is a **radio broadcast** — one tower transmits, any radio tunes in directly.
+No wires (props) connecting them needed.
 
 ```
-App (data lives here)
- └── Layout        ← doesn't need it, just passes it
-      └── Section  ← doesn't need it, just passes it
-           └── Card ← finally uses it
+createContext()        → the channel
+<Context.Provider>     → the broadcast tower
+useContext()           → any component tuning in
 ```
 
-Every component in the middle is forced to carry data it has no interest in.
-Context short-circuits this — `Card` can tune in directly.
+---
+
+## When To Use It
+
+✅ Same data needed across many components on different branches of the tree
+✅ Examples: theme, logged in user, language, cart, notifications
+
+❌ Parent passing data to one direct child → just use props instead
+❌ Frequently changing data → consider Zustand or Redux
+❌ Async data fetching → consider React Query or SWR
+
+**Simple rule:**
+
+```
+One parent → one direct child        = just use props
+Same data across many components     = use useContext
+```
 
 ---
 
-## When Should You Use useContext?
-
-✅ **Good use cases:**
-- **Theme** — light/dark mode shared across the whole app
-- **Current user** — logged in user's name, avatar, permissions
-- **Language/locale** — app-wide language setting
-- **Shopping cart** — item count accessible from navbar and checkout
-- **Notifications** — alert state accessible from anywhere
-
-❌ **Not the best fit:**
-- Data only needed between a parent and one direct child → just use props
-- Frequently changing data (every keystroke) → can cause performance issues,
-  consider a state manager like Zustand or Redux instead
-- Complex async data fetching → consider React Query or SWR instead
-
-**Simple rule:** If the same piece of data needs to be read or changed
-by three or more components that are not directly connected — reach for useContext.
-
----
-
-## The 3-Part Mental Model
-
-| Part | Analogy | What It Does |
-|---|---|---|
-| `createContext()` | The TV channel | Creates the data channel |
-| `<Context.Provider>` | The broadcast tower | Transmits the data |
-| `useContext()` | The TV tuning in | Receives the data |
-
----
-
-## Example Folder Structure
+## Folder Structure
 
 ```
 src/
- ├── context/
- │    └── UserContext.jsx    ← creates context + Provider
- ├── hooks/
- │    └── useUser.js         ← custom hook to consume context
- └── components/
-      └── ...your components
+ ├── context/UserContext.jsx   ← context + Provider
+ ├── hooks/useUser.js          ← custom hook
+ └── components/...
 ```
 
 ---
 
-## Step 1 — Create the Context
+## Implementation — 4 Steps
+
+**Step 1 — Context file**
+
+The basic version holds just the user state. When fetching data is involved
+the Provider expands to include fetch lifecycle states — see the
+"When Context Includes Fetched Data" section below.
 
 ```jsx
 // context/UserContext.jsx
-import { createContext, useState } from "react"
+import { createContext, useState } from "react";
 
-// 1. Create the channel with a sensible default value
-export const UserContext = createContext(null)
+export const UserContext = createContext(null);
 
-// 2. Create the Provider — this holds your shared state
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null)
-
+  const [user, setUser] = useState(null);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
-  )
+  );
 }
 ```
 
-**Key points:**
-- `createContext()` creates the channel — pass a sensible default value
-- The Provider holds the **shared state** that any component can access
-- `value={{ user, setUser }}` is what gets broadcast — include both the
-  data AND the function to change it
-
----
-
-## Step 2 — Create the Custom Hook
+**Step 2 — Custom hook**
 
 ```jsx
 // hooks/useUser.js
-import { useContext } from "react"
-import { UserContext } from "../context/UserContext"
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 export function useUser() {
-  return useContext(UserContext)
+  return useContext(UserContext);
 }
 ```
 
-**Why wrap it in a custom hook?**
-- Components only need one import instead of two
-- Keeps the internals of context hidden from components
-- Easy to add extra logic later without touching every component
+**Step 3 — Wrap the app**
 
----
-
-## Step 3 — Wrap Your App with the Provider
+`PageDisplay` lives INSIDE the Provider so it can safely access context.
+It handles all possible states — loading, logged out, and logged in:
 
 ```jsx
 // App.jsx
-import { UserProvider } from "./context/UserContext"
-import Dashboard from "./components/Dashboard"
+function PageDisplay() {
+  const { user, isLoading } = useUser();
 
-function App() {
+  if (isLoading) return <LoadingSpinner />; // fetching data
+  if (!user)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoginForm /> // no user — centered login
+      </div>
+    );
+  return <Dashboard />; // user exists — full layout
+}
+
+export default function App() {
   return (
-    <UserProvider>
-      <Dashboard />
-    </UserProvider>
-  )
+    <div className="min-h-screen bg-slate-100">
+      <UserProvider>
+        <PageDisplay />
+      </UserProvider>
+    </div>
+  );
 }
 ```
 
-**Key point:** Anything wrapped inside the Provider can access the shared data.
-Anything outside cannot. Wrap at the highest level that needs it.
+**Step 4 — Consume in any component**
+
+```jsx
+const { user } = useUser(); // reading only
+const { user, setUser } = useUser(); // reading and changing
+```
 
 ---
 
-## Step 4 — Consume Context in Any Component
+## Conditional Rendering — Deciding What Gets Displayed
 
-No props needed — any component just calls the custom hook directly.
+### 📌 Mental Note
+
+> The conditional always lives in the component that **first needs to act on the data** —
+> page decisions in `PageDisplay`, style decisions inside the component that owns the element.
+> `App.jsx` renders the Provider so it can't read context itself — `PageDisplay` lives inside it and can.
+
+---
+
+### Theme Switch — Swap Styles Based On A Value
 
 ```jsx
-// A component that only READS the data
-import { useUser } from "../hooks/useUser"
+function ArticleCard() {
+  const { theme } = useTheme();
+  return (
+    <div
+      className={
+        theme === "dark" ? "bg-slate-800 text-white" : "bg-white text-slate-800"
+      }
+    >
+      Article content here
+    </div>
+  );
+}
+```
 
-function Navbar() {
-  const { user } = useUser()
+---
 
+## When Context Includes Fetched Data
+
+When context manages fetched data the Provider needs additional state
+to handle the full fetch lifecycle:
+
+```jsx
+// context/UserContext.jsx
+import { createContext, useState, useEffect } from "react";
+
+export const UserContext = createContext(null);
+
+export function UserProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]); // fetched list
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users",
+        );
+        if (!response.ok) throw new Error("Failed to fetch users"); // guard bad responses
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        setError(error.message || "Failed to fetch users");
+      } finally {
+        setIsLoading(false); // always runs — success or failure
+      }
+    };
+    fetchUsers();
+  }, []); // empty array — fetch once on mount, never again
+
+  return (
+    <UserContext.Provider
+      value={{ user, setUser, users, isLoading, error, setError }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+}
+```
+
+**The fetch lifecycle states — always needed when fetching manually:**
+
+```
+isLoading  → is data still being fetched?
+error      → did something go wrong?
+users      → the actual fetched result
+```
+
+**What to expose in `value` vs keep internal:**
+
+```
+✅ expose       → user, setUser, users, isLoading, error, setError
+❌ keep internal → setUsers, setIsLoading (only context manages these)
+```
+
+> For a dedicated guide on manual data fetching in React see the separate fetching README.
+
+---
+
+## Error Handling With useContext
+
+Errors fall into two categories — **fetch errors** and **logic errors**.
+
+```
+Fetch error  → set automatically in the Provider catch block
+Logic error  → set by a component via setError() e.g. "User not found"
+Display      → any component that reads error from useUser()
+Clear        → setError(null) at the start of handleSubmit
+```
+
+### 📌 Error Mental Note
+
+Always clear errors before the next attempt — otherwise old messages persist:
+
+```jsx
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setError(null); // ← clear previous error first
+  // ... rest of logic
+};
+```
+
+---
+
+## Controlled Forms — Wiring Up Input Fields
+
+A **controlled form** means React owns the input values — not the browser.
+Every keystroke updates state and the input always reflects what's in state.
+
+```jsx
+// components/LoginForm.jsx
+import { useState } from "react";
+import { useUser } from "../hooks/useUser";
+
+export default function LoginForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const { users, setUser, setError, isLoading, error } = useUser();
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // stops browser page refresh
+    setError(null); // clear previous error
+    if (!name || !email) return; // guard — block empty submissions
+
+    // Basic email format validation using industry standard regex pattern
+    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailIsValid) return; // guard — invalid email format
+
+    // match against fetched users — case insensitive email comparison
+    const matchedUser = users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase(),
+    );
+    matchedUser ? setUser(matchedUser) : setError("User not found");
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {" "}
+      {/* onSubmit on form, not the button */}
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+      <input
+        type="text"
+        value={name} // controlled by state
+        onChange={(e) => setName(e.target.value)} // updates state on keystroke
+      />
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button
+        type="submit"
+        disabled={isLoading} // disabled while fetching
+        className="... disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Sign In
+      </button>
+    </form>
+  );
+}
+```
+
+> Email validation checks format only — not whether the address actually exists.
+> Confirming a real address requires backend email verification.
+
+### Resetting / Logging Out
+
+```jsx
+export default function Navbar() {
+  const { user, setUser } = useUser();
   return (
     <nav>
-      <p>Welcome, {user?.name}</p>
+      <span>{user?.name}</span>
+      <button onClick={() => setUser(null)}>Sign Out</button>
     </nav>
-  )
-}
-```
-
-```jsx
-// A component that READS and CHANGES the data
-import { useUser } from "../hooks/useUser"
-
-function LogoutButton() {
-  const { setUser } = useUser()
-
-  return (
-    <button onClick={() => setUser(null)}>
-      Log Out
-    </button>
-  )
-}
-```
-
-**Rule of thumb:**
-```
-{ data }           → components that only display the data
-{ data, setData }  → components that can also change it
-```
-
----
-
-## Before vs After
-
-```jsx
-// ❌ BEFORE — prop drilling
-function App() {
-  const [user, setUser] = useState(null)
-  return <Dashboard user={user} setUser={setUser} />
-}
-
-function Dashboard({ user, setUser }) {  // doesn't use user
-  return <Navbar user={user} />          // just passing it along
-}
-
-function Navbar({ user }) {              // finally uses it
-  return <p>Welcome, {user?.name}</p>
-}
-```
-
-```jsx
-// ✅ AFTER — useContext
-function App() {
-  return (
-    <UserProvider>       {/* broadcasts user data */}
-      <Dashboard />      {/* no props needed */}
-    </UserProvider>
-  )
-}
-
-function Dashboard() {
-  return <Navbar />      {/* no props needed */}
-}
-
-function Navbar() {
-  const { user } = useUser()   {/* tunes in directly */}
-  return <p>Welcome, {user?.name}</p>
+  );
 }
 ```
 
 ---
 
-## The 4-Step Checklist
+## Optional Chaining — The ?. Operator
 
+Context data starts as `null` — accessing a property on `null` crashes the app.
+Optional chaining returns `undefined` safely instead:
+
+```jsx
+user.name; // ❌ crashes if user is null
+user?.name; // ✅ returns undefined safely if user is null
 ```
-1. Create the context and Provider  →  context/YourContext.jsx
-2. Create the custom hook           →  hooks/useYourHook.js
-3. Wrap your app with the Provider  →  App.jsx
-4. Call the hook in any component   →  any component that needs the data
+
+Use it any time the value could be `null` at the time the component renders:
+
+```jsx
+<p>{user?.name}</p>
+<p>{user?.email}</p>
+<p>{user?.company?.name}</p>  {/* nested objects — chain each level */}
+```
+
+### With A Fallback Value — The ?? Operator
+
+```jsx
+<p>{user?.name ?? "Guest"}</p> // shows "Guest" if name is null or undefined
 ```
 
 ---
 
-## Quick Rules to Remember
+## The Golden Rules
 
-- Shared state lives in the **context file**, not `App.jsx`
-- The Provider wraps everything that needs access to the data
-- Components that only **read** → destructure `{ data }`
-- Components that **change** → destructure `{ data, setData }`
-- Middleman components need **nothing** — no props, no hook
-- Context file must use `.jsx` extension if it contains JSX
+```
+1.  Context file must be .jsx not .js — it contains JSX
+2.  Always call the hook → useUser() not useUser
+3.  null = deliberate empty | undefined = accidental empty
+4.  Use optional chaining → user?.name not user.name
+5.  Components INSIDE Provider can access context. Outside cannot.
+6.  Middleman components need nothing — no props, no hook
+7.  Hooks never return JSX — that's a component's job
+8.  Setter name must match across the entire chain
+9.  Controlled forms → value + onChange on every input
+10. e.preventDefault() stops the browser refreshing on form submit
+11. Clear errors at the start of handleSubmit → setError(null)
+12. Only expose in value what components actually need
+```
+
+---
+
+## Import Path Reference
+
+```
+From components/ → hooks/    ../hooks/useUser
+From components/ → context/  ../context/UserContext
+From src/        → anywhere  ./folder/file
+```
+
+`./` = current folder | `../` = up one level
+
+---
+
+## Checklist
+
+```
+□ context/UserContext.jsx
+  □ createContext(null) exported
+  □ useState inside Provider — user, users, isLoading, error
+  □ useEffect fetch on mount with [] dependency array
+  □ response.ok guard after fetch
+  □ finally block for setIsLoading(false)
+  □ value exposes only what components need
+  □ .jsx extension
+
+□ hooks/useUser.js
+  □ imports useContext + UserContext
+  □ returns useContext(UserContext)
+
+□ App.jsx
+  □ wrapped with <UserProvider>
+  □ PageDisplay handles isLoading, !user, and user states
+  □ LoginForm centered separately from Dashboard layout
+
+□ Components
+  □ import from ../hooks/useUser
+  □ destructure only what's needed
+  □ optional chaining on all user data → user?.name
+  □ nested objects chained → user?.company?.name
+
+□ Controlled Forms
+  □ useState for each input field
+  □ value + onChange on every input
+  □ e.preventDefault() in handleSubmit
+  □ setError(null) at start of handleSubmit
+  □ empty field guard before updating context
+  □ email validation before updating context
+  □ case insensitive email match → .toLowerCase()
+  □ button disabled={isLoading}
+  □ error displayed conditionally in JSX
+```
