@@ -1,4 +1,4 @@
-// UseContext + useStte Hook
+// UseContext + useState Hook
 import { createContext, useState } from "react";
 
 // Exported variable that holds the value of the createContext function
@@ -11,5 +11,4 @@ export function UserProvider({ children }) {
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
-  );
-}
+  ); }
