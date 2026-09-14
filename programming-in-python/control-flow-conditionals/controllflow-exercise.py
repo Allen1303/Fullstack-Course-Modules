@@ -37,5 +37,5 @@ for index, num in enumerate(num_list):
         print(f" Number {num} was found at position", index)
         break
 print(f" There is a total of {count} items")
+print("------------------------------------")
 # --------------------------------------------------------------------------------------
-# In Python, a Break statement can be used to break out of a for loop at any time
